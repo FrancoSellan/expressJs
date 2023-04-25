@@ -15,14 +15,38 @@ const express = require("express");
 
 const app = express();
 
-app.use(express.text())
-app.use(express.json())
-app.use(express.urlencoded({extended: false}))
+app.get("/hello/:user", (req, res) => {
+  console.log(typeof req.params.user);
+  res.send(`Hello ${req.params.user.toUpperCase()}`);
+});
 
-app.post('/user', (req, res) => {
-  console.log(req.body)
-  res.send('Nuevo usuario creado')
-})
+app.get("/add/:x/:y", (req, res) => {
+  const { x, y } = req.params;
+  res.send(`Result: ${parseInt(x) + parseInt(y)}`);
+});
+
+app.get("/users/:username/photo", (req, res) => {
+  console.log(req.params);
+  if (req.params.username === "franco") {
+    return res.sendFile("./fondo.jpg", {
+      root: __dirname,
+    });
+  }
+  res.send("el usuario no tiene acceso");
+});
+
+app.get("/name/:nombre/age/:age", (req, res) => {
+  console.log(req.params);
+  res.send(`El usuario ${req.params.nombre} tiene ${req.params.age} años.`);
+});
+// app.use(express.text())
+// app.use(express.json())
+// app.use(express.urlencoded({extended: false}))
+
+// app.post('/user', (req, res) => {
+//   console.log(req.body)
+//   res.send('Nuevo usuario creado')
+// })
 // app.get("/", (req, res) => {
 //   res.send("Hello world");
 // });
