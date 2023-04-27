@@ -1,3 +1,5 @@
+// Server http solo con node
+
 // const http = require('http')
 // const fs = require('fs')
 
@@ -10,11 +12,12 @@
 
 // console.log('server on port', 3000)
 
-// SERVER CON EXPRESS
+// Server con express
 const express = require("express");
 
 const app = express();
 
+// Usando parametros
 app.get("/hello/:user", (req, res) => {
   console.log(typeof req.params.user);
   res.send(`Hello ${req.params.user.toUpperCase()}`);
@@ -39,6 +42,8 @@ app.get("/name/:nombre/age/:age", (req, res) => {
   console.log(req.params);
   res.send(`El usuario ${req.params.nombre} tiene ${req.params.age} años.`);
 });
+
+
 // app.use(express.text())
 // app.use(express.json())
 // app.use(express.urlencoded({extended: false}))
